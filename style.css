@@ -1,17 +1,22 @@
 h1{
     text-align: center;
-    color:yellow;
+    color:black;
 }
+ 
+ #to-do{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+} 
 
-/* #to-do{
-    position: relative;
-    left:40%;
-} */
+.input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5em;
+}
 
 .list{
     display: flex;
-    /* justify-content: center; */
-    /* text-align: center; */
-    width: 100%;
-    /* background-color: blue; */
+    justify-content: space-between;
 }

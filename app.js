@@ -1,80 +1,80 @@
-const a=document.querySelector('#to-do');
+const a = document.querySelector("#to-do");
 
+a.addEventListener("keyup", func);
 
-a.addEventListener("keyup",function(event){
-    var temp = document.getElementById('to-do').value;
-    var inputData = String(temp);
-    inputData = inputData.trim();
-    
-    const list=document.querySelector(".input")
+function func(event) {
+  var temp = document.getElementById("to-do").value;
+  var inputData = String(temp);
+  inputData = inputData.trim();
 
-    if(event.keyCode==13)
-    {
-        var division=document.createElement("div");
-        division.setAttribute("class","list");   
-        division.setAttribute("draggable",true);
+  const list = document.querySelector(".input");
 
-       
+  if (event.keyCode == 13) {
+    var division = document.createElement("div");
+    division.setAttribute("class", "list");
+    division.setAttribute("draggable", true);
 
-        var box=document.createElement('input');
-        box.setAttribute("type","checkbox");
-        division.appendChild(box);
+    division.addEventListener("dragstart", handleDragStart, false);
+    division.addEventListener("dragover", handleDragOver, false);
+    division.addEventListener('drop', handleDrop, false);
+    division.addEventListener("dragend", handleDragEnd, false);
 
-        box.addEventListener("click",function(event){
-            if(event.target.checked == true)
-            newPara.style.cssText='text-decoration:line-through';
-            else
-            newPara.style.cssText='text-decoration:none';            
-        }
-        );
-    
-        var newPara=document.createElement('p');
-        const a=document.createTextNode(inputData);
-        newPara.appendChild(a);
-        division.appendChild(newPara);
+    var box = document.createElement("input");
+    box.setAttribute("type", "checkbox");
+    division.appendChild(box);
 
-        var cross=document.createElement('button');
-        // cross.setAttribute("type","button");
-        division.appendChild(cross);
-        cross.innerHTML=" &#10005;";
+    box.addEventListener("click", strike);
 
-        cross.addEventListener('click',function(event){
-            division.remove();
-        }
-        );
+    var newPara = document.createElement("p");
+    const a = document.createTextNode(inputData);
+    newPara.appendChild(a);
+    division.appendChild(newPara);
 
-        list.appendChild(division);
+    var cross = document.createElement("button");
+    division.appendChild(cross);
+    cross.innerHTML = " &#10005;";
 
-         // moving function
-         division.addEventListener("dragstart",function(e) {
-            this.style.opacity = '0.4';  // this / e.target is the source node.
-          });
-        
-        division.addEventListener("dragover",function(e) {
-            if (e.preventDefault) {
-              e.preventDefault(); // Necessary. Allows us to drop.
-            }
-          
-            e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
-          
-            return false;
-          });
+    cross.addEventListener("click", remove);
 
-          division.addEventListener('drop',function(e) {
-            // this / e.target is current target element.
-          
-            if (e.stopPropagation) {
-              e.stopPropagation(); // stops the browser from redirecting.
-            }
-          
-            // See the section on the DataTransfer object.
-          
-            return false;
-          });
-        //   function ends
+    list.appendChild(division);
 
-        document.getElementById('to-do').value="";
-    }
-    
+    document.getElementById("to-do").value = "";
+  }
 }
-);
+
+function strike(event) {
+  if (event.target.checked == true)
+    event.target.nextSibling.style.cssText = "text-decoration:line-through";
+  else event.target.nextSibling.style.cssText = "text-decoration:none";
+}
+
+function remove(event) {
+  this.parentNode.remove();
+}
+
+function handleDragStart(e) {
+  this.style.opacity = "0.4";
+}
+
+function handleDragOver(e) {
+  if (e.preventDefault) {
+    e.preventDefault();
+  }
+
+  e.dataTransfer.dropEffect = "move";
+
+  return false;
+}
+
+function handleDrop(e) {
+    if (e.stopPropagation) {
+      e.stopPropagation(); 
+    }  
+    return false;
+  }
+
+function handleDragEnd(e) {  
+    [].forEach.call(cols, function (col) {
+      col.classList.remove('over');
+    });
+  }
