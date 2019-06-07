@@ -14,10 +14,10 @@ function func(event) {
     division.setAttribute("class", "list");
     division.setAttribute("draggable", true);
 
-    division.addEventListener("dragstart", handleDragStart, false);
-    division.addEventListener("dragover", handleDragOver, false);
-    division.addEventListener('drop', handleDrop, false);
-    division.addEventListener("dragend", handleDragEnd, false);
+    // division.addEventListener("dragstart", handleDragStart);
+    division.addEventListener("dragover", handleDragOver);
+    division.addEventListener("drop", handleDrop);
+    division.addEventListener("dragend", handleDragEnd);
 
     var box = document.createElement("input");
     box.setAttribute("type", "checkbox");
@@ -52,9 +52,9 @@ function remove(event) {
   this.parentNode.remove();
 }
 
-function handleDragStart(e) {
-  this.style.opacity = "0.4";
-}
+// function handleDragStart(e) {
+//   this.style.opacity = "0.4";
+// }
 
 function handleDragOver(e) {
   if (e.preventDefault) {
@@ -67,14 +67,15 @@ function handleDragOver(e) {
 }
 
 function handleDrop(e) {
-    if (e.stopPropagation) {
-      e.stopPropagation(); 
-    }  
-    return false;
+  if (e.stopPropagation) {
+    e.stopPropagation();
   }
 
-function handleDragEnd(e) {  
-    [].forEach.call(cols, function (col) {
-      col.classList.remove('over');
-    });
-  }
+  return false;
+}
+
+function handleDragEnd(e) {
+  [].forEach.call(cols, function(col) {
+    col.classList.remove("over");
+  });
+}
