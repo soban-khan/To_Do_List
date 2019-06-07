@@ -1,0 +1,17 @@
+h1{
+    text-align: center;
+    color:yellow;
+}
+
+/* #to-do{
+    position: relative;
+    left:40%;
+} */
+
+.list{
+    display: flex;
+    /* justify-content: center; */
+    /* text-align: center; */
+    width: 100%;
+    /* background-color: blue; */
+}
